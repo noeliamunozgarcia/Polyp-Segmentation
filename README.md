@@ -4,7 +4,7 @@ Polyp segmentation using U-Net in Tensorflow 2.0 using the CVC-ClinicDB (CVC-612
 ## How to implement this project
 1. Clone this repository.
 ```sh
-   $ git clone https://github.com/antonioscardace/ISIC-2019-v2.git
+   $ git clone https://github.com/noeliamunozgarcia/Polyp-Segmentation.git
 ``` 
 2. Navigate to the directory containing this `README` in a terminal.
 ```sh
