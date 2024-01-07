@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, CSVLogger, TensorBoard
 from data import load_data, tf_dataset
 from model import build_model
+import matplotlib.pyplot as plt
 
 def iou(y_true, y_pred):
     def f(y_true, y_pred):
@@ -52,9 +53,34 @@ if __name__ == "__main__":
     if len(valid_x) % batch != 0:
         valid_steps += 1
 
-    model.fit(train_dataset,
+     history = model.fit(train_dataset,
         validation_data=valid_dataset,
         epochs=epochs,
         steps_per_epoch=train_steps,
         validation_steps=valid_steps,
         callbacks=callbacks)
+
+    plt.plot(history.history['loss'], label='Training Loss')
+    plt.plot(history.history['val_loss'], label='Validation Loss')
+    plt.title('Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.show()
+
+    plt.plot(history.history['acc'], label='Training Accuracy')
+    plt.plot(history.history['val_acc'], label='Validation Accuracy')
+    plt.title('Accuracy')
+    plt.xlabel('Epochs')
+    plt.ylabel('%')
+    plt.legend()
+    plt.show()
+
+    plt.plot(history.history['iou'], label='Training IoU')
+    plt.plot(history.history['val_iou'], label='Validation IoU')
+    plt.title('Training IoU')
+    plt.xlabel('Epochs')
+    plt.ylabel('%')
+    plt.legend()
+    plt.show()
+
